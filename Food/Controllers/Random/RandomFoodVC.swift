@@ -82,7 +82,7 @@ extension RandomFoodVC: UIViewControllerTransitioningDelegate{
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
         transition.startingPoint = randomBtn.center
-        transition.bubbleColor = UIColor.cyan
+        transition.bubbleColor = self.view.backgroundColor!
         transition.duration = 0.5
         return transition
     }

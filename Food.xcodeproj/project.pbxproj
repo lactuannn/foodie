@@ -30,6 +30,8 @@
 		88A01312202AF9BB0045ED47 /* AddFoodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A01311202AF9BB0045ED47 /* AddFoodView.xib */; };
 		88A01314202AF9ED0045ED47 /* AddFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A01313202AF9ED0045ED47 /* AddFoodView.swift */; };
 		88E70675202BF9A9000FA1E7 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E70674202BF9A9000FA1E7 /* History.storyboard */; };
+		88E70678202C02A5000FA1E7 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E70677202C02A5000FA1E7 /* HistoryVC.swift */; };
+		88E7067A202C04C5000FA1E7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E70679202C04C5000FA1E7 /* Global.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		88A01311202AF9BB0045ED47 /* AddFoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFoodView.xib; sourceTree = "<group>"; };
 		88A01313202AF9ED0045ED47 /* AddFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodView.swift; sourceTree = "<group>"; };
 		88E70674202BF9A9000FA1E7 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		88E70677202C02A5000FA1E7 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		88E70679202C04C5000FA1E7 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		C891BA77676650FF1F155ED7 /* Pods-Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Food/Pods-Food.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +121,7 @@
 				885F19A3202AE09600D102AF /* View */,
 				885F1992202ADD4A00D102AF /* Controllers */,
 				885F1980202ADAA200D102AF /* AppDelegate.swift */,
+				88E70679202C04C5000FA1E7 /* Global.swift */,
 				885F1987202ADAA200D102AF /* Assets.xcassets */,
 				885F1989202ADAA200D102AF /* LaunchScreen.storyboard */,
 				885F198C202ADAA200D102AF /* Info.plist */,
@@ -130,6 +135,7 @@
 				885F199B202ADE0600D102AF /* Main */,
 				885F19A5202AE0A900D102AF /* Home */,
 				8842DA5C202B0ACC00C90527 /* Random */,
+				88E70676202C027F000FA1E7 /* History */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -208,6 +214,14 @@
 				88A01311202AF9BB0045ED47 /* AddFoodView.xib */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		88E70676202C027F000FA1E7 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				88E70677202C02A5000FA1E7 /* HistoryVC.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		AC6441A54A9918EA96376BCD /* Pods */ = {
@@ -366,12 +380,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8842DA62202B0E0900C90527 /* DetailRandomVC.swift in Sources */,
+				88E70678202C02A5000FA1E7 /* HistoryVC.swift in Sources */,
 				8842DA5B202AFDFF00C90527 /* Meals.swift in Sources */,
 				885F1998202ADD5200D102AF /* BaseVC.swift in Sources */,
 				885F1983202ADAA200D102AF /* HomeVC.swift in Sources */,
 				885F199D202ADEA300D102AF /* UIViewController+Ext.swift in Sources */,
 				885F1997202ADD5200D102AF /* StartVC.swift in Sources */,
 				885F199A202ADDB400D102AF /* ViewDefine.swift in Sources */,
+				88E7067A202C04C5000FA1E7 /* Global.swift in Sources */,
 				88A0130B202AE43C0045ED47 /* HomeCollectionViewCell.swift in Sources */,
 				88A0130E202AF5050045ED47 /* AddFoodVC.swift in Sources */,
 				885F19AC202AE10200D102AF /* TableView + Ext.swift in Sources */,
@@ -515,7 +531,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C891BA77676650FF1F155ED7 /* Pods-Food.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ECST853AQ5;
 				INFOPLIST_FILE = Food/Info.plist;
@@ -531,7 +547,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 020DA7FB94F42CF7232227FC /* Pods-Food.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ECST853AQ5;
 				INFOPLIST_FILE = Food/Info.plist;

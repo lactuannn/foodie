@@ -74,14 +74,11 @@ class MainTabBarController: UITabBarController {
 
         // Timeline
         let navigationHome = UIStoryboard(name: Storyboard.Home.name, bundle: nil).instantiateInitialViewController()!
-//        let tabBarItemHome = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic_home"), tag: 10)
-//        navigationHome.tabBarItem = tabBarItemHome
 
         let naviRandom = UIStoryboard(name: Storyboard.Random.name, bundle: nil).instantiateInitialViewController()!
         
         let naviHis = UIStoryboard(name: Storyboard.History.name, bundle: nil).instantiateInitialViewController()!
-        let tabBarItemHis = UITabBarItem(tabBarSystemItem: .history, tag: 30)
-        naviHis.tabBarItem = tabBarItemHis
+        
         // set list childs controller to tabbar
         let controllers = [navigationHome,naviRandom,naviHis]
         self.viewControllers = controllers
