@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HOm-IP-shP">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Medium</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Chọn món-->
+        <scene sceneID="J6g-lk-rxo">
+            <objects>
+                <navigationController id="HOm-IP-shP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chọn món" image="Group 21" id="h1b-0r-Ltv"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pi0-8m-Ud0">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kh0-ie-G4i" kind="relationship" relationship="rootViewController" id="aSh-RG-rau"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aSI-qt-mek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="175.19999999999999" y="-188.45577211394306"/>
+        </scene>
+        <!--Random-->
+        <scene sceneID="Py2-Wv-dci">
+            <objects>
+                <viewController storyboardIdentifier="RandomFoodVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kh0-ie-G4i" userLabel="Random" customClass="RandomFoodVC" customModule="Food" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dn4-ds-F5M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B56-8N-0Qo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHỌN MÓN ĂN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnL-eg-0K3">
+                                        <rect key="frame" x="127.5" y="34" width="121" height="22"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="AnL-eg-0K3" firstAttribute="top" secondItem="B56-8N-0Qo" secondAttribute="top" constant="34" id="8QM-d9-fzm"/>
+                                    <constraint firstItem="AnL-eg-0K3" firstAttribute="centerX" secondItem="B56-8N-0Qo" secondAttribute="centerX" id="mnG-We-92z"/>
+                                    <constraint firstAttribute="height" constant="64" id="vLP-d3-Wr3"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y13-QC-yQt">
+                                <rect key="frame" x="124" y="310" width="127" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="SKQ-Fu-ETz"/>
+                                    <constraint firstAttribute="width" constant="127" id="r3d-ja-RME"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="25"/>
+                                <state key="normal" title="CHỌN">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="randomBtnPressed:" destination="kh0-ie-G4i" eventType="touchUpInside" id="dDV-Fw-Odg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="B56-8N-0Qo" firstAttribute="leading" secondItem="Zl8-lF-LSN" secondAttribute="leading" id="9Y2-5a-Ghd"/>
+                            <constraint firstItem="Y13-QC-yQt" firstAttribute="centerX" secondItem="dn4-ds-F5M" secondAttribute="centerX" id="KsZ-aZ-pFw"/>
+                            <constraint firstItem="B56-8N-0Qo" firstAttribute="top" secondItem="dn4-ds-F5M" secondAttribute="top" id="XDV-C9-hOt"/>
+                            <constraint firstItem="B56-8N-0Qo" firstAttribute="trailing" secondItem="Zl8-lF-LSN" secondAttribute="trailing" id="iqG-hj-qfO"/>
+                            <constraint firstItem="Y13-QC-yQt" firstAttribute="centerY" secondItem="dn4-ds-F5M" secondAttribute="centerY" id="uKb-Ym-0eo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zl8-lF-LSN"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Trang chủ" id="icY-Ez-ABW"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="randomBtn" destination="Y13-QC-yQt" id="l6V-Nq-FXg"/>
+                        <segue destination="GAF-WS-5V4" kind="presentation" identifier="sgRandom" id="lXC-JW-W4F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3GT-GH-apm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="920.79999999999995" y="-188.45577211394306"/>
+        </scene>
+        <!--Detail RandomVC-->
+        <scene sceneID="1bk-wT-Bpn">
+            <objects>
+                <viewController id="GAF-WS-5V4" customClass="DetailRandomVC" customModule="Food" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4pc-eX-oM2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjI-nf-DJx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QUAY MÓN ĂN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRq-BK-oqM">
+                                        <rect key="frame" x="129.5" y="34" width="117" height="22"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfU-WK-p5J">
+                                        <rect key="frame" x="8" y="41" width="41" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="aVR-HC-PMt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancel:" destination="GAF-WS-5V4" eventType="touchUpInside" id="CBi-Jq-Z0Y"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="NRq-BK-oqM" firstAttribute="centerX" secondItem="hjI-nf-DJx" secondAttribute="centerX" id="1BE-IV-CeH"/>
+                                    <constraint firstAttribute="bottom" secondItem="RfU-WK-p5J" secondAttribute="bottom" constant="8" id="3Lh-hk-RWM"/>
+                                    <constraint firstItem="RfU-WK-p5J" firstAttribute="leading" secondItem="hjI-nf-DJx" secondAttribute="leading" constant="8" id="LOC-4d-4Mi"/>
+                                    <constraint firstAttribute="height" constant="64" id="M0f-cU-kr4"/>
+                                    <constraint firstItem="NRq-BK-oqM" firstAttribute="top" secondItem="hjI-nf-DJx" secondAttribute="top" constant="34" id="fMv-qH-DFH"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qDC-HI-FmW">
+                                <rect key="frame" x="0.0" y="193" width="375" height="280"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="ZE4-KN-zyj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hjI-nf-DJx" firstAttribute="leading" secondItem="65z-pf-gBy" secondAttribute="leading" id="42e-4y-fq1"/>
+                            <constraint firstItem="qDC-HI-FmW" firstAttribute="centerY" secondItem="4pc-eX-oM2" secondAttribute="centerY" id="RDj-fj-cfX"/>
+                            <constraint firstItem="hjI-nf-DJx" firstAttribute="top" secondItem="4pc-eX-oM2" secondAttribute="top" id="UfN-tE-7zo"/>
+                            <constraint firstItem="hjI-nf-DJx" firstAttribute="trailing" secondItem="65z-pf-gBy" secondAttribute="trailing" id="csf-Ii-p0P"/>
+                            <constraint firstItem="qDC-HI-FmW" firstAttribute="trailing" secondItem="65z-pf-gBy" secondAttribute="trailing" id="hOx-0i-P1y"/>
+                            <constraint firstItem="qDC-HI-FmW" firstAttribute="leading" secondItem="65z-pf-gBy" secondAttribute="leading" id="iq6-Uc-FqA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="65z-pf-gBy"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aCd-89-dqd"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="name" destination="NRq-BK-oqM" id="igi-F1-VlB"/>
+                        <outlet property="thumb" destination="qDC-HI-FmW" id="iS4-jn-8RF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fnD-qH-P7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1636" y="-188.45577211394306"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Group 21" width="32" height="32"/>
+    </resources>
+</document>

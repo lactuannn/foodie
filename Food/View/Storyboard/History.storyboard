@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1AL-17-AQa">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="VBX-pD-pIN">
+            <objects>
+                <viewController id="70V-az-Bah" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sLH-5v-jsW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mW9-Fq-EyV"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oZw-eT-jcj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JLy-rG-EPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="740" y="-237"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="E8t-kY-4K0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kjB-Km-QoX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="kt8-1a-foM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9pq-Ib-4qV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="70V-az-Bah" kind="relationship" relationship="rootViewController" id="gzU-4M-Zec"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1h3-qo-NnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82.400000000000006" y="-236.13193403298354"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="NsW-uP-1yd">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1AL-17-AQa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0hH-0L-GJc">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="kjB-Km-QoX" kind="relationship" relationship="viewControllers" id="tZo-OS-nrN"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Tv-gD-LAF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-556.79999999999995" y="-236.58170914542731"/>
+        </scene>
+    </scenes>
+</document>
