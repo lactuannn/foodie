@@ -19,10 +19,14 @@ class AddFoodView: UIView {
     @IBOutlet weak var changeImgBtn: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var addressLbl: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
     
     //MARK: - Variables
     
     weak var delegate: AddFoodViewDelegate?
+    
+    var amount: Int { return addressTextField.string.digits.integer }
     
     //MARK: - Initialized
 
@@ -51,10 +55,18 @@ class AddFoodView: UIView {
         
         //Button
         
-        changeImgBtn.layer.borderWidth = 1
+        changeImgBtn.layer.borderWidth = 0.3
         changeImgBtn.layer.borderColor = UIColor.lightGray.cgColor
         changeImgBtn.layer.cornerRadius = 20
         
+        addressTextField.keyboardType = .numberPad
+        addressTextField.text = Formatter.decimal.string(from: amount as NSNumber)
+        addressTextField.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+    }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        
+        addressTextField.text = Formatter.decimal.string(from: amount as NSNumber)
     }
     
     @IBAction func changeImgPressed(_ sender: UIButton){

@@ -6,7 +6,13 @@ target 'Food' do
   use_frameworks!
 
   # Pods for Food
+
 pod 'RealmSwift'
 pod 'BubbleTransition', '~> 2.0.0'
+pod 'Firebase/Core'
+pod 'Firebase/Firestore'
+pod 'PKHUD', '~> 5.0'
+pod 'FSPagerView'
+pod ‘Kingfisher’
 
 end

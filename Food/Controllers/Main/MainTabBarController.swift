@@ -79,8 +79,10 @@ class MainTabBarController: UITabBarController {
         
         let naviHis = UIStoryboard(name: Storyboard.History.name, bundle: nil).instantiateInitialViewController()!
         
+        let navFav = UIStoryboard(name: Storyboard.Favorite.name, bundle: nil).instantiateInitialViewController()!
+        
         // set list childs controller to tabbar
-        let controllers = [navigationHome,naviRandom,naviHis]
+        let controllers = [navigationHome,naviRandom,navFav,naviHis]
         self.viewControllers = controllers
         self.hideTabbar(hide: false)
     }

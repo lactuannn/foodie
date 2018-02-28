@@ -12,7 +12,11 @@ import BubbleTransition
 
 class RandomFoodVC: UIViewController {
     
+    //MARK: - IBOutlet
+    
     @IBOutlet weak var randomBtn: UIButton!
+    
+    //MARK: - Variables
 
     var realm = try! Realm()
     
@@ -23,6 +27,8 @@ class RandomFoodVC: UIViewController {
     var notificationToken: NotificationToken?
     
     var name: String!
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +57,16 @@ class RandomFoodVC: UIViewController {
         
         notificationToken?.invalidate()
     }
+    
+    //MARK: - IBAction
 
     @IBAction func randomBtnPressed(_ sender: UIButton){
         
         if data.count > 0 {
             let number = Int(arc4random_uniform(UInt32(data.count)))
-
+            Global.shared.addHistory(dict: ["title": data[number].name,
+                                                    "thumb": data[number].thumb,
+                                                    "price": data[number].price])
             performSegue(withIdentifier: "sgRandom", sender: number)
         } else {
             print("Empty")
@@ -69,7 +79,7 @@ class RandomFoodVC: UIViewController {
             let img = UIImage(data: data[index].thumb)
             vc.transitioningDelegate = self
             vc.modalPresentationStyle = .custom
-            vc.passName = data[index].title
+            vc.passName = data[index].name
             vc.image = img
         }
     }

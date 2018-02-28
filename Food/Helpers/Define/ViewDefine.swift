@@ -17,5 +17,9 @@ struct Storyboard {
     struct History {
         static let name = "History"
     }
+    
+    struct Favorite {
+        static let name = "Favorite"
+    }
 
 }

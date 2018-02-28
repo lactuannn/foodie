@@ -51,11 +51,19 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bạn chưa ăn món nào " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9C-NY-kAO">
+                                <rect key="frame" x="91" y="321" width="193.5" height="26"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="19"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mW9-Fq-EyV" firstAttribute="bottom" secondItem="O13-fd-MKn" secondAttribute="bottom" id="9OU-rV-oLd"/>
+                            <constraint firstItem="A9C-NY-kAO" firstAttribute="centerY" secondItem="sLH-5v-jsW" secondAttribute="centerY" id="J66-CM-Kwe"/>
                             <constraint firstItem="O13-fd-MKn" firstAttribute="top" secondItem="g0n-U4-byC" secondAttribute="bottom" id="W7z-zx-ekT"/>
+                            <constraint firstItem="A9C-NY-kAO" firstAttribute="centerX" secondItem="sLH-5v-jsW" secondAttribute="centerX" id="Z4t-en-pl8"/>
                             <constraint firstItem="O13-fd-MKn" firstAttribute="leading" secondItem="mW9-Fq-EyV" secondAttribute="leading" id="du7-AK-gea"/>
                             <constraint firstItem="g0n-U4-byC" firstAttribute="top" secondItem="sLH-5v-jsW" secondAttribute="top" id="elj-mk-UoX"/>
                             <constraint firstItem="mW9-Fq-EyV" firstAttribute="trailing" secondItem="O13-fd-MKn" secondAttribute="trailing" id="wEM-eJ-Vvp"/>
@@ -68,6 +76,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="O13-fd-MKn" id="YY6-0Y-qaq"/>
+                        <outlet property="lbl" destination="A9C-NY-kAO" id="Y77-TZ-Io0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLy-rG-EPi" userLabel="First Responder" sceneMemberID="firstResponder"/>

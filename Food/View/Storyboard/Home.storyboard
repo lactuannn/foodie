@@ -11,7 +11,6 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="AvenirNext.ttc">
-            <string>AvenirNext-Bold</string>
             <string>AvenirNext-Medium</string>
         </array>
     </customFonts>
@@ -19,22 +18,11 @@
         <!--Trang chủ-->
         <scene sceneID="2MF-to-ty7">
             <objects>
-                <viewController id="gXH-Py-A4a" customClass="HomeVC" customModule="Food" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gXH-Py-A4a" customClass="HomeVC" customModule="Food" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0BG-5t-P9Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FbZ-A7-XLa">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="yVH-EA-03z">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="15" maxX="0.0" maxY="15"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPm-RK-KQU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
@@ -80,33 +68,28 @@
                                     <constraint firstAttribute="bottom" secondItem="xUe-LL-5XV" secondAttribute="bottom" constant="8" id="qIC-24-yFv"/>
                                 </constraints>
                             </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bạn chưa thêm món ăn nào" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdH-Zz-nbT">
-                                <rect key="frame" x="76" y="322" width="223" height="23.5"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eqQ-IG-FQN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="eqQ-IG-FQN" firstAttribute="top" secondItem="lPm-RK-KQU" secondAttribute="bottom" id="2fi-Xv-Koz"/>
                             <constraint firstItem="lPm-RK-KQU" firstAttribute="leading" secondItem="VCC-Yb-K6d" secondAttribute="leading" id="5qQ-I7-het"/>
-                            <constraint firstItem="FbZ-A7-XLa" firstAttribute="leading" secondItem="VCC-Yb-K6d" secondAttribute="leading" id="8AU-0I-IGh"/>
-                            <constraint firstItem="rdH-Zz-nbT" firstAttribute="centerX" secondItem="0BG-5t-P9Z" secondAttribute="centerX" id="GKy-Jl-X4P"/>
+                            <constraint firstItem="VCC-Yb-K6d" firstAttribute="trailing" secondItem="eqQ-IG-FQN" secondAttribute="trailing" id="ApO-rw-bmC"/>
                             <constraint firstItem="lPm-RK-KQU" firstAttribute="trailing" secondItem="VCC-Yb-K6d" secondAttribute="trailing" id="MKZ-UF-AAH"/>
+                            <constraint firstItem="eqQ-IG-FQN" firstAttribute="leading" secondItem="VCC-Yb-K6d" secondAttribute="leading" id="Pic-Cg-7fo"/>
                             <constraint firstItem="lPm-RK-KQU" firstAttribute="top" secondItem="0BG-5t-P9Z" secondAttribute="top" id="QnJ-k9-fXs"/>
-                            <constraint firstItem="FbZ-A7-XLa" firstAttribute="top" secondItem="lPm-RK-KQU" secondAttribute="bottom" id="aRA-4W-wT1"/>
-                            <constraint firstItem="VCC-Yb-K6d" firstAttribute="trailing" secondItem="FbZ-A7-XLa" secondAttribute="trailing" id="fWd-Ms-PsY"/>
-                            <constraint firstItem="VCC-Yb-K6d" firstAttribute="bottom" secondItem="FbZ-A7-XLa" secondAttribute="bottom" id="ffQ-bj-jhU"/>
-                            <constraint firstItem="rdH-Zz-nbT" firstAttribute="centerY" secondItem="0BG-5t-P9Z" secondAttribute="centerY" id="xrz-Kt-1Ba"/>
+                            <constraint firstItem="VCC-Yb-K6d" firstAttribute="bottom" secondItem="eqQ-IG-FQN" secondAttribute="bottom" id="cPD-dz-GnS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VCC-Yb-K6d"/>
                     </view>
                     <navigationItem key="navigationItem" title="Trang chủ" id="9aq-QG-kYD"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="collectionView" destination="FbZ-A7-XLa" id="9M8-RF-OkM"/>
-                        <outlet property="lbl" destination="rdH-Zz-nbT" id="AJc-aj-qTj"/>
-                        <segue destination="hcf-r3-yjC" kind="show" identifier="sgAdd" id="JYI-EH-s4W"/>
+                        <outlet property="tableView" destination="eqQ-IG-FQN" id="DKW-pl-xEj"/>
+                        <segue destination="hcf-r3-yjC" kind="show" identifier="sgAddFood" id="JYI-EH-s4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cwm-Hf-NoR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -124,8 +107,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btv-5y-OzA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THÊM MÓN ĂN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKL-N8-ecg">
-                                        <rect key="frame" x="129.5" y="34" width="117" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKL-N8-ecg">
+                                        <rect key="frame" x="187.5" y="34" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -186,6 +169,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="scrollView" destination="30f-wB-ixc" id="6im-zR-M2Z"/>
+                        <outlet property="tit" destination="eKL-N8-ecg" id="nZw-1q-glk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WS8-ae-V6i" userLabel="First Responder" sceneMemberID="firstResponder"/>

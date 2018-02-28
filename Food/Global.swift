@@ -22,9 +22,11 @@ class Global {
         pref = UserDefaults.standard
     }
     
-    func addFavoriteChannel(dict: [String: String]) {
-        var history = [[String: String]]()
-        if let _history = pref.object(forKey: "history") as? [[String: String]] {
+    //MARK: - History
+    
+    func addHistory(dict: [String: Any]) {
+        var history = [[String: Any]]()
+        if let _history = pref.object(forKey: "history") as? [[String: Any]] {
             history = _history
         }
         history.append(dict)
@@ -32,16 +34,40 @@ class Global {
         pref.set(history, forKey: "history")
     }
     
-    func getFavoriteChannel() -> [[String: String]]! {
-        guard let history = pref.object(forKey: "history") as? [[String: String]] else { return nil }
+    func getHistory() -> [[String: Any]]! {
+        guard let history = pref.object(forKey: "history") as? [[String: Any]] else { return nil }
         return history
     }
     
-    func deleteFavoriteChannel(index: Int) {
-        guard var history = pref.object(forKey: "history") as? [[String: String]] else { return }
+    func deleteHistory(index: Int) {
+        guard var history = pref.object(forKey: "history") as? [[String: Any]] else { return }
         history.remove(at: index)
         
         pref.set(history, forKey: "history")
     }
 
+    
+    //MARK: - Favorite
+    
+    func addFavorite(dict: [String: Any]) {
+        var favorite = [[String: Any]]()
+        if let _favorite = pref.object(forKey: "favorite") as? [[String: Any]] {
+            favorite = _favorite
+        }
+        favorite.append(dict)
+        
+        pref.set(favorite, forKey: "history")
+    }
+    
+    func getFavorite() -> [[String: Any]]! {
+        guard let favorite = pref.object(forKey: "favorite") as? [[String: Any]] else { return nil }
+        return favorite
+    }
+    
+    func deleteFavorite(index: Int) {
+        guard var favorite = pref.object(forKey: "favorite") as? [[String: Any]] else { return }
+        favorite.remove(at: index)
+        
+        pref.set(favorite, forKey: "favorite")
+    }
 }

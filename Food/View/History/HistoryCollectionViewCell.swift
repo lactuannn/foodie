@@ -1,28 +1,28 @@
 //
-//  HomeCollectionViewCell.swift
+//  HistoryCollectionViewCell.swift
 //  Food
 //
-//  Created by Lac Tuan on 2/7/18.
+//  Created by Lac Tuan on 2/8/18.
 //  Copyright © 2018 Lac Tuan. All rights reserved.
 //
 
 import UIKit
 
-protocol HomeCollectionViewCellDelegate: NSObjectProtocol{
-    
-    func deleteItem(_ tag: Int)
+protocol HistoryCollectionViewCellDelegate: NSObjectProtocol{
+    func deleteItem(_ btnTag: Int)
 }
 
-class HomeCollectionViewCell: UICollectionViewCell {
+class HistoryCollectionViewCell: UICollectionViewCell {
+
     
     @IBOutlet weak var thumb: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var deleteBtn: UIButton!
-
+    
     var btnTag: Int!
     
-    weak var delegate: HomeCollectionViewCellDelegate?
+    weak var delegate: HistoryCollectionViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,12 +31,12 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.4
         self.layer.shadowOffset = CGSize.zero
         self.layer.masksToBounds = false
-  
+        
     }
     
     @IBAction func deleteBtnPressed(_ sender: UIButton){
         
-        delegate?.deleteItem(btnTag)     
+        delegate?.deleteItem(btnTag)
     }
     
     func configure(_ title: String, _ img: Data,_ price: String) {

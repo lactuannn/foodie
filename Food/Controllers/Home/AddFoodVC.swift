@@ -9,17 +9,27 @@
 import UIKit
 import RealmSwift
 
+protocol AddFoodVCDelegate: NSObjectProtocol{
+    
+    func reloadData()
+}
+
 class AddFoodVC: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var tit: UILabel!
     
     //MARK: - Variables
     
-    var addFoodView: AddFoodView!
-    var imgData: Data!
+    weak var delegate: AddFoodVCDelegate?
     
-    let imagePicker = UIImagePickerController()
-    var realm = try! Realm()
+    var addFoodView: AddFoodView!
+    private var imgData: Data!
+    
+    private let imagePicker = UIImagePickerController()
+    private var realm = try! Realm()
+    
+    var isAddFood: Bool!
     
     //MARK: - Lifecycle
 
@@ -35,6 +45,7 @@ class AddFoodVC: UIViewController {
         
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(hiddenKeyboard))
         view.addGestureRecognizer(tapGes)
+        
     }
     
     deinit {
@@ -62,6 +73,16 @@ class AddFoodVC: UIViewController {
             scrollView.contentSize = addFoodView.frame.size
             scrollView.addSubview(addFoodView)
         }
+        
+        if isAddFood {
+            addFoodView.addressLbl.text = "Giá: "
+            addFoodView.nameLbl.text = "Tên món: "
+            tit.text = "THÊM MÓN ĂN"
+        } else {
+            addFoodView.addressLbl.text = "Địa chỉ: "
+            addFoodView.nameLbl.text = "Tên quán: "
+            tit.text = "THÊM QUÁN ĂN"
+        }
     }
     
     //MARK: - IBActions
@@ -82,18 +103,29 @@ class AddFoodVC: UIViewController {
             }
             
             if let name = addFoodView.nameTextField.text {
-                value["title"] = name
+                value["name"] = name
             }
             
-            if let price = addFoodView.addressTextField.text {
-                value["price"] = price
+            if isAddFood {
+                if let price = addFoodView.addressTextField.text {
+                    value["price"] = price
+                }
+            } else {
+                if let address = addFoodView.addressTextField.text {
+                    value["address"] = address
+                }
             }
             
             try! realm.write {
                 
-                realm.add(ListFood(value: value))
+                if isAddFood {
+                    realm.add(ListFood(value: value))
+                } else {
+                    realm.add(Location(value: value))
+                }
             }
             
+            delegate?.reloadData()
             navigationController?.popViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Nhập tên món ăn, giá", message: "", preferredStyle: .alert)
@@ -133,6 +165,7 @@ extension AddFoodVC: AddFoodViewDelegate {
     
     func presentImagePicker() {
         
+        imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }

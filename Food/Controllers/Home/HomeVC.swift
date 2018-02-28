@@ -8,43 +8,92 @@
 
 import UIKit
 import RealmSwift
+import FirebaseFirestore
+import PKHUD
 
-private let homeCellId = "homeCell"
+private let locationCellId = "locationTableCell"
+private let foodTableCellId = "foodTableCell"
+private let pagerCellId = "pagerCell"
 
 class HomeVC: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var lbl: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Variables
     
-    var realm = try! Realm()
+    private var realm = try! Realm()
     
-    var data = [ListFood]()
-    var notificationToken: NotificationToken?
+    private var data = [Any]()
+    private var titles = [String]()
+    private var notificationToken: NotificationToken?
     
-    var isEdit = false
+    private var isEdit = false
+    private var listFood = [ListFood]()
+    private var location = [Location]()
+    
+    private var db: Firestore!
+    
+    private var isAddFood: Bool!
 
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpRealm()
+        db = Firestore.firestore()
+        
+        getListChannel {
+            self.setUpRealm()
+        }
+
+        titles = ["Món ăn",
+                  "Địa điểm"]
       
         navigationController?.navigationBar.isHidden = true
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundView = lbl
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        collectionView.registerNib(HomeCollectionViewCell.self, homeCellId)
-
+        tableView.allowsSelection = false
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        tableView.registerNib(FoodTableViewCell.self, foodTableCellId)
+        tableView.registerNib(LocationTVC.self, locationCellId)
+        tableView.registerNib(PagerTableViewCell.self, pagerCellId)
     }
+    
+    //MARK: - IBActions
     
     @IBAction func addPressed(_ sender: UIButton){
         
-        performSegue(withIdentifier: "sgAdd", sender: nil)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let addFood = UIAlertAction(title: "Thêm món", style: .default) { [weak self] (_) in
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.isAddFood = true
+            
+            strongSelf.performSegue(withIdentifier: "sgAddFood", sender: nil)
+            
+        }
+        
+        let addLocation = UIAlertAction(title: "Thêm địa điểm", style: .default) {[weak self] (_) in
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.isAddFood = false
+            
+            strongSelf.performSegue(withIdentifier: "sgAddFood", sender: nil)
+        }
+        
+        let cancel = UIAlertAction(title: "Huỷ", style: .cancel, handler: nil)
+        
+        alert.addAction(cancel)
+        alert.addAction(addFood)
+        alert.addAction(addLocation)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func editPressed(_ sender: UIButton){
@@ -56,7 +105,46 @@ class HomeVC: UIViewController {
             sender.setTitle("Edit", for: .normal)
             isEdit = false
         }
-        collectionView.reloadData()
+    }
+    
+    func getListChannel(completion: (() -> ())?){
+        
+        HUD.show(.labeledProgress(title: "Loading...", subtitle: nil))
+        
+        db.collection("Location").document("near").getDocument {[weak self] (snapshot, error) in
+            
+            guard let strongSelf = self else { return }
+            
+            
+            if error != nil {
+                print("error:", error?.localizedDescription ?? "")
+                return
+            }
+            
+            guard let snapshot = snapshot?.data()!["nearLocation"] as? [[String: Any]] else { return }
+            
+            for snap in snapshot {
+                
+                if let name = snap["name"] as? String,
+                    let address = snap["address"] as? String {
+                    
+                    let value = ["name": name, "address": address]
+                    
+                    let location = Location(value: value)
+                    
+                    strongSelf.location.append(location)
+                    
+                   // print(strongSelf.location)
+                }
+            }
+            
+            HUD.hide(animated: true)
+            
+            completion?()
+        }
+        
+        
+
     }
     
     func setUpRealm(){
@@ -64,9 +152,12 @@ class HomeVC: UIViewController {
         func updateList() {
             
             let list = Array(realm.objects(ListFood.self))
-            data = list
-            collectionView.reloadData()
-            
+            let location = Array(realm.objects(Location.self))
+
+            self.location += location
+            self.listFood += list
+            data = [self.listFood, self.location]
+            tableView.reloadData()
         }
         updateList()
         
@@ -77,69 +168,105 @@ class HomeVC: UIViewController {
     }
     
     deinit {
-        
         notificationToken?.invalidate()
+    }
+    
+    //MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let vc = segue.destination as? AddFoodVC {
+            
+            vc.isAddFood = isAddFood
+            vc.delegate = self
+        }
     }
 
 }
 
-//MARK: - CollectionView Datsource
+//MARK: - TableView Datsource
 
-extension HomeVC: UICollectionViewDataSource {
+extension HomeVC: UITableViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if data.count > 0 {
-            collectionView.backgroundView?.isHidden = true
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else {
             return data.count
-        } else {
-            collectionView.backgroundView?.isHidden = false
-            return 0
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = data[indexPath.row]
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCellId, for: indexPath) as! HomeCollectionViewCell
-        
-        cell.btnTag = indexPath.row
-        cell.delegate = self
-        cell.configure(item.title, item.thumb, item.price)
-        
-        if isEdit {
-            cell.deleteBtn.isHidden = false
+        if indexPath.section == 1 {
+            let item = data[indexPath.row]
+            
+            if item is [ListFood] {
+                let cell = tableView.dequeueReusableCell(withIdentifier: foodTableCellId, for: indexPath) as! FoodTableViewCell
+                
+                cell.configure(item, titles[indexPath.row])
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
+                
+                cell.configure(item, titles[indexPath.row])
+                
+                return cell
+            }
         } else {
-            cell.deleteBtn.isHidden = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: pagerCellId, for: indexPath) as! PagerTableViewCell
+            
+            return cell
+            
         }
-        
-        return cell
     }
+
 }
 
 //MARK: - TableView Delegate
 
 
-extension HomeVC: UICollectionViewDelegateFlowLayout {
+extension HomeVC: UITableViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 328, height: 210)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
-    
 }
 
-
-extension HomeVC: HomeCollectionViewCellDelegate{
+extension HomeVC: AddFoodVCDelegate{
     
-    func deleteItem(_ tag: Int) {
+    func reloadData() {
         
-        try! realm.write {
-            realm.delete(data[tag])
+        data.removeAll()
+        tableView.reloadData()
+        getListChannel {
+            self.setUpRealm()
         }
     }
 }
+
+//
+//extension HomeVC: HomeCollectionViewCellDelegate{
+//
+//    func deleteItem(_ tag: Int) {
+//
+//        try! realm.write {
+//            realm.delete(data[tag])
+//        }
+//    }
+//
+//    func isLike(_ bool: Bool,_ tag: Int) {
+//
+//        try! realm.write {
+//            data[tag].isLiked = bool
+//        }
+//    }
+//}
 
 
 

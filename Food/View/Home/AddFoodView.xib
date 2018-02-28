@@ -125,8 +125,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ZkU-a3-Qpu"/>
             <connections>
+                <outlet property="addressLbl" destination="gR5-Ky-QJA" id="EBL-X5-yv3"/>
                 <outlet property="addressTextField" destination="BaT-3w-ChT" id="Wwf-BV-qbL"/>
                 <outlet property="changeImgBtn" destination="i0d-x0-KYa" id="hBU-HZ-8Sh"/>
+                <outlet property="nameLbl" destination="DPe-3o-kpF" id="D8g-0f-ARD"/>
                 <outlet property="nameTextField" destination="9kF-iq-o6x" id="Nv2-rp-RbB"/>
                 <outlet property="thumb" destination="Ib9-bT-2Rt" id="mkj-lo-xSO"/>
             </connections>

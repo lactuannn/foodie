@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L1c-Tz-1Ed">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--FavoriteVC-->
+        <scene sceneID="sSJ-44-64R">
+            <objects>
+                <viewController id="ClQ-sV-8uP" customClass="FavoriteVC" customModule="Food" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="upn-t3-KsP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="AmU-hr-nBb"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="J5Q-lB-dtk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9UP-4W-h8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="-142.57871064467767"/>
+        </scene>
+        <!--Yêu thích-->
+        <scene sceneID="wQT-xF-mec">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L1c-Tz-1Ed" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Yêu thích" image="ic_favorite" id="W4Q-UL-ibs"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zMg-lK-0Mi">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ClQ-sV-8uP" kind="relationship" relationship="rootViewController" id="dMU-6W-pTc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdl-OH-ybC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="-152"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_favorite" width="24" height="24"/>
+    </resources>
+</document>
