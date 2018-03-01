@@ -60,7 +60,7 @@
                 <outlet property="collectionView" destination="xwe-GO-dJZ" id="Yem-sX-cfe"/>
                 <outlet property="title" destination="LG3-Pb-pBL" id="sHb-SU-0ys"/>
             </connections>
-            <point key="canvasLocation" x="-100" y="95"/>
+            <point key="canvasLocation" x="-225" y="52"/>
         </tableViewCell>
     </objects>
 </document>
