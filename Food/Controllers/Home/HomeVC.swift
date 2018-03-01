@@ -247,10 +247,11 @@ extension HomeVC: AddFoodVCDelegate{
         getListChannel {
             self.setUpRealm()
         }
+        
     }
 }
 
-
+//
 //extension HomeVC: HomeCollectionViewCellDelegate{
 //
 //    func deleteItem(_ tag: Int) {

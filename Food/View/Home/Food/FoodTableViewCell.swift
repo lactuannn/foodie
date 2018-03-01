@@ -15,6 +15,7 @@ class FoodTableViewCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noticeLbl: UILabel!
     
     var data = [ListFood]()
     
