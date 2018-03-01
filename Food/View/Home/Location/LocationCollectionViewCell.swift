@@ -21,6 +21,8 @@ class LocationCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = CGSize.zero
         self.layer.masksToBounds = false
+
+
     }
     
     func configure(_ item: Any) {

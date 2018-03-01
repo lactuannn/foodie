@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let foodCellId = "foodCell"
 
+protocol FoodCellDelegate: NSObjectProtocol{
+    
+    func showAlert(_ alert: UIAlertController)
+}
 
 class FoodTableViewCell: UITableViewCell {
     
@@ -17,7 +22,13 @@ class FoodTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noticeLbl: UILabel!
     
-    var data = [ListFood]()
+    weak var delegate: FoodCellDelegate?
+    
+    private var data = [ListFood]()
+    
+    private var notificationToken: NotificationToken?
+    
+    private var realm = try! Realm()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +37,52 @@ class FoodTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         
         collectionView.registerNib(FoodCollectionViewCell.self, foodCellId)
+        
+        realm.autorefresh = false
+        
+//        self.notificationToken = self.realm.observe { _,_ in
+//            self.realm.refresh()
+//        }
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        
+        self.collectionView.addGestureRecognizer(longPress)
+    }
+    
+    @objc func longPressed(longPressGestureRecognizer: UILongPressGestureRecognizer){
+        
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
+            let touchPoint = longPressGestureRecognizer.location(in: self.collectionView)
+            
+            if let indexPath = collectionView.indexPathForItem(at: touchPoint){
+                
+                handleDeleteItem(indexPath[1])
+            }
+        }
+    }
+    
+    func handleDeleteItem(_ index: Int){
+        
+        let alert = UIAlertController(title: "Có chắc muốn xoá?", message: nil, preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Không", style: .cancel, handler: nil)
+        let ok = UIAlertAction(title: "Xoá", style: .default) {[weak self] (_) in
+            
+            guard let strongSelf = self else { return }
+            
+            try! strongSelf.realm.write {
+                strongSelf.realm.delete(strongSelf.data[index])
+                strongSelf.realm.refresh()
+                strongSelf.data.remove(at: index)
+            }
+            
+            strongSelf.collectionView.reloadData()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        delegate?.showAlert(alert)
     }
     
     func configure(_ data: Any,_ string: String){
@@ -53,6 +110,7 @@ extension FoodTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: foodCellId, for: indexPath) as! FoodCollectionViewCell
         
         cell.configure(item)
+        
         
         return cell
     }

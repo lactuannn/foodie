@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol HomeCollectionViewCellDelegate: NSObjectProtocol{
     
@@ -26,6 +27,9 @@ class FoodCollectionViewCell: UICollectionViewCell {
     var isLiked = false
     
     weak var delegate: HomeCollectionViewCellDelegate?
+    
+    private var realm = try! Realm()
+    private var notificationToken: NotificationToken?
     
     override func awakeFromNib() {
         super.awakeFromNib()

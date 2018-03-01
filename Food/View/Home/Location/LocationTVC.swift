@@ -16,6 +16,7 @@ class LocationTVC: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     
     var data = [Location]()
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,3 +62,4 @@ extension LocationTVC: UICollectionViewDelegateFlowLayout{
         return CGSize(width: 220, height: 140)
     }
 }
+

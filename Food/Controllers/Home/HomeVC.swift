@@ -162,14 +162,12 @@ class HomeVC: UIViewController {
         updateList()
         
         // Notify us when Realm changes
-        self.notificationToken = self.realm.observe { _,_ in
-            updateList()
-        }
+//        self.notificationToken = self.realm.observe { _,_ in
+//            updateList()
+//            self.realm.refresh()
+//        }
     }
     
-    deinit {
-        notificationToken?.invalidate()
-    }
     
     //MARK: - Segue
     
@@ -214,12 +212,14 @@ extension HomeVC: UITableViewDataSource {
                     cell.noticeLbl.isHidden = true
                 }
                 
+                cell.delegate = self
+                
                 cell.configure(item, titles[indexPath.row])
                 
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
-                
+            
                 cell.configure(item, titles[indexPath.row])
                 
                 return cell
@@ -256,6 +256,14 @@ extension HomeVC: AddFoodVCDelegate{
             self.setUpRealm()
         }
         
+    }
+}
+
+extension HomeVC: FoodCellDelegate {
+    
+    func showAlert(_ alert: UIAlertController) {
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
