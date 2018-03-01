@@ -207,6 +207,12 @@ extension HomeVC: UITableViewDataSource {
             
             if item is [ListFood] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: foodTableCellId, for: indexPath) as! FoodTableViewCell
+
+                if listFood.count == 0{
+                    cell.noticeLbl.isHidden = false
+                }else{
+                    cell.noticeLbl.isHidden = true
+                }
                 
                 cell.configure(item, titles[indexPath.row])
                 
@@ -244,6 +250,8 @@ extension HomeVC: AddFoodVCDelegate{
         
         data.removeAll()
         tableView.reloadData()
+        listFood.removeAll()
+        location.removeAll()
         getListChannel {
             self.setUpRealm()
         }

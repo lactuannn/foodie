@@ -44,6 +44,15 @@
                             <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chưa thêm món ăn nào..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kR-2G-jYm">
+                        <rect key="frame" x="39.5" y="87" width="242" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Nn7-0D-Xxs"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="LG3-Pb-pBL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="107-XK-zNO"/>
@@ -51,6 +60,8 @@
                     <constraint firstAttribute="bottom" secondItem="xwe-GO-dJZ" secondAttribute="bottom" id="F5b-Ty-uHd"/>
                     <constraint firstAttribute="trailing" secondItem="xwe-GO-dJZ" secondAttribute="trailing" id="QGJ-V4-1bY"/>
                     <constraint firstItem="LG3-Pb-pBL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="gmf-hB-dnN"/>
+                    <constraint firstItem="0kR-2G-jYm" firstAttribute="top" secondItem="LG3-Pb-pBL" secondAttribute="bottom" constant="55" id="hp9-H6-IWg"/>
+                    <constraint firstItem="0kR-2G-jYm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hx9-jr-7Nl"/>
                     <constraint firstItem="xwe-GO-dJZ" firstAttribute="top" secondItem="LG3-Pb-pBL" secondAttribute="bottom" id="wEi-yP-u8A"/>
                 </constraints>
             </tableViewCellContentView>
@@ -58,6 +69,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="collectionView" destination="xwe-GO-dJZ" id="Yem-sX-cfe"/>
+                <outlet property="noticeLbl" destination="0kR-2G-jYm" id="bFf-iT-4HS"/>
                 <outlet property="title" destination="LG3-Pb-pBL" id="sHb-SU-0ys"/>
             </connections>
             <point key="canvasLocation" x="-225" y="52"/>

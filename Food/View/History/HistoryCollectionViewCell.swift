@@ -28,10 +28,11 @@ class HistoryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         self.layer.shadowRadius = 4
-        self.layer.shadowOpacity = 0.4
+        self.layer.shadowOpacity = 0.2
         self.layer.shadowOffset = CGSize.zero
         self.layer.masksToBounds = false
-        
+        self.layer.cornerRadius = 10
+        self.thumb.layer.cornerRadius = 10
     }
     
     @IBAction func deleteBtnPressed(_ sender: UIButton){

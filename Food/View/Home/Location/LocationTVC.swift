@@ -32,6 +32,7 @@ class LocationTVC: UITableViewCell {
         
         if let item = data as? [Location] {
             self.data = item
+            collectionView.reloadData()
         }
     }
 }

@@ -34,6 +34,7 @@ class FoodTableViewCell: UITableViewCell {
         
         if let item = data as? [ListFood] {
             self.data = item
+            collectionView.reloadData()
         }
     }
 }
