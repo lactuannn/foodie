@@ -219,6 +219,8 @@ extension HomeVC: UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
+                
+                cell.delegate = self
             
                 cell.configure(item, titles[indexPath.row])
                 
@@ -263,6 +265,13 @@ extension HomeVC: FoodCellDelegate {
     
     func showAlert(_ alert: UIAlertController) {
         
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+extension HomeVC: LocationTVCDelegate {
+    
+    func presentAlert(_ alert: UIAlertController) {
         present(alert, animated: true, completion: nil)
     }
 }

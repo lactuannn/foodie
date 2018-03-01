@@ -40,10 +40,6 @@ class FoodTableViewCell: UITableViewCell {
         
         realm.autorefresh = false
         
-//        self.notificationToken = self.realm.observe { _,_ in
-//            self.realm.refresh()
-//        }
-        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         
         self.collectionView.addGestureRecognizer(longPress)
@@ -72,7 +68,7 @@ class FoodTableViewCell: UITableViewCell {
             
             try! strongSelf.realm.write {
                 strongSelf.realm.delete(strongSelf.data[index])
-                strongSelf.realm.refresh()
+               // strongSelf.realm.refresh()
                 strongSelf.data.remove(at: index)
             }
             

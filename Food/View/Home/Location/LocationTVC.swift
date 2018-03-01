@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let locationCellId = "locationCell"
+
+protocol LocationTVCDelegate: NSObjectProtocol{
+    
+    func presentAlert(_ alert: UIAlertController)
+}
 
 class LocationTVC: UITableViewCell {
     
@@ -17,6 +23,9 @@ class LocationTVC: UITableViewCell {
     
     var data = [Location]()
 
+    weak var delegate: LocationTVCDelegate?
+    
+    private var realm = try! Realm()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +34,47 @@ class LocationTVC: UITableViewCell {
         collectionView.dataSource = self
         
         collectionView.registerNib(LocationCollectionViewCell.self, locationCellId)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        
+        self.collectionView.addGestureRecognizer(longPress)
     }
+    
+    @objc func longPressed(longPressGestureRecognizer: UILongPressGestureRecognizer){
+        
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
+            let touchPoint = longPressGestureRecognizer.location(in: self.collectionView)
+            
+            if let indexPath = collectionView.indexPathForItem(at: touchPoint){
+                
+                handleDeleteItem(indexPath[1])
+            }
+        }
+    }
+    
+    func handleDeleteItem(_ index: Int){
+        
+        let alert = UIAlertController(title: "Có chắc muốn xoá?", message: nil, preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Không", style: .cancel, handler: nil)
+        let ok = UIAlertAction(title: "Xoá", style: .default) {[weak self] (_) in
+            
+            guard let strongSelf = self else { return }
+            
+            try! strongSelf.realm.write {
+                strongSelf.realm.delete(strongSelf.data[index])
+                strongSelf.data.remove(at: index)
+            }
+            
+            strongSelf.collectionView.reloadData()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        delegate?.presentAlert(alert)
+    }
+    
     
     func configure(_ data: Any,_ string: String){
         
