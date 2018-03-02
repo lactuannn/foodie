@@ -89,6 +89,7 @@ class FoodTableViewCell: UITableViewCell {
             self.data = item
             collectionView.reloadData()
         }
+        
     }
 }
 

@@ -16,6 +16,8 @@
 		8806B06320318B2E00B0D30D /* LocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8806B06120318B2E00B0D30D /* LocationTVC.swift */; };
 		8806B06420318B2E00B0D30D /* LocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8806B06220318B2E00B0D30D /* LocationTVC.xib */; };
 		8806B068203190C800B0D30D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8806B067203190C800B0D30D /* GoogleService-Info.plist */; };
+		8827C5072049334100B0E90A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8827C5062049334100B0E90A /* Constants.swift */; };
+		8827C50920493FF600B0E90A /* NearFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8827C50820493FF600B0E90A /* NearFood.swift */; };
 		8842DA5B202AFDFF00C90527 /* ListFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842DA5A202AFDFF00C90527 /* ListFood.swift */; };
 		8842DA5E202B0AE300C90527 /* RandomFoodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842DA5D202B0AE300C90527 /* RandomFoodVC.swift */; };
 		8842DA60202B0AF300C90527 /* Random.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8842DA5F202B0AF300C90527 /* Random.storyboard */; };
@@ -60,6 +62,8 @@
 		8806B06120318B2E00B0D30D /* LocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTVC.swift; sourceTree = "<group>"; };
 		8806B06220318B2E00B0D30D /* LocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTVC.xib; sourceTree = "<group>"; };
 		8806B067203190C800B0D30D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8827C5062049334100B0E90A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8827C50820493FF600B0E90A /* NearFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearFood.swift; sourceTree = "<group>"; };
 		8842DA5A202AFDFF00C90527 /* ListFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFood.swift; sourceTree = "<group>"; };
 		8842DA5D202B0AE300C90527 /* RandomFoodVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFoodVC.swift; sourceTree = "<group>"; };
 		8842DA5F202B0AF300C90527 /* Random.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Random.storyboard; sourceTree = "<group>"; };
@@ -130,11 +134,19 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		882AE8092048F38800B84FC1 /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		8842DA59202AFDF200C90527 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8842DA5A202AFDFF00C90527 /* ListFood.swift */,
 				8806B05F20317C4200B0D30D /* Location.swift */,
+				8827C50820493FF600B0E90A /* NearFood.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +196,7 @@
 				885F1992202ADD4A00D102AF /* Controllers */,
 				885F1980202ADAA200D102AF /* AppDelegate.swift */,
 				88E70679202C04C5000FA1E7 /* Global.swift */,
+				8827C5062049334100B0E90A /* Constants.swift */,
 				885F1987202ADAA200D102AF /* Assets.xcassets */,
 				885F1989202ADAA200D102AF /* LaunchScreen.storyboard */,
 				8806B067203190C800B0D30D /* GoogleService-Info.plist */,
@@ -278,6 +291,7 @@
 				8855928D203D88DA00854102 /* Banner */,
 				8806B06620318D7B00B0D30D /* Location */,
 				8806B06520318D6B00B0D30D /* Food */,
+				882AE8092048F38800B84FC1 /* History */,
 				88A01313202AF9ED0045ED47 /* AddFoodView.swift */,
 				88A01311202AF9BB0045ED47 /* AddFoodView.xib */,
 			);
@@ -449,11 +463,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Food/Pods-Food-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -467,11 +484,14 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BubbleTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -495,8 +515,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8827C5072049334100B0E90A /* Constants.swift in Sources */,
 				8842DA62202B0E0900C90527 /* DetailRandomVC.swift in Sources */,
 				88E70678202C02A5000FA1E7 /* HistoryVC.swift in Sources */,
+				8827C50920493FF600B0E90A /* NearFood.swift in Sources */,
 				8806B05D20313A3400B0D30D /* LocationCollectionViewCell.swift in Sources */,
 				8842DA5B202AFDFF00C90527 /* ListFood.swift in Sources */,
 				885F1998202ADD5200D102AF /* BaseVC.swift in Sources */,

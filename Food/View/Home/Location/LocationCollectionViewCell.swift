@@ -9,7 +9,7 @@
 import UIKit
 
 class LocationCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var thumb: UIImageView!
     @IBOutlet weak var address: UILabel!
@@ -21,11 +21,23 @@ class LocationCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = CGSize.zero
         self.layer.masksToBounds = false
-
-
+        
+        
     }
     
     func configure(_ item: Any) {
+        
+        if let item = item as? NearFood {
+            
+            name.text = item.name
+            address.text = item.vicinity
+            
+            //            if let data = item.thumb {
+            //                let image = UIImage(data: data)
+            //
+            //                thumb.image = image
+            //            }
+        }
         
         if let item = item as? Location {
             
@@ -37,6 +49,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
                 
                 thumb.image = image
             }
+            
         }
     }
 }

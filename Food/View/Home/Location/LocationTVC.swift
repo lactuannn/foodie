@@ -21,7 +21,7 @@ class LocationTVC: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var title: UILabel!
     
-    var data = [Location]()
+    var data = [Any]()
 
     weak var delegate: LocationTVCDelegate?
     
@@ -61,10 +61,10 @@ class LocationTVC: UITableViewCell {
             
             guard let strongSelf = self else { return }
             
-            try! strongSelf.realm.write {
-                strongSelf.realm.delete(strongSelf.data[index])
-                strongSelf.data.remove(at: index)
-            }
+//            try! strongSelf.realm.write {
+//                strongSelf.realm.delete(strongSelf.data[index])
+//                strongSelf.data.remove(at: index)
+//            }
             
             strongSelf.collectionView.reloadData()
         }
@@ -80,6 +80,11 @@ class LocationTVC: UITableViewCell {
         
         title.text = string
         
+        if let item = data as? [NearFood] {
+            self.data = item
+            collectionView.reloadData()
+        }
+        
         if let item = data as? [Location] {
             self.data = item
             collectionView.reloadData()
@@ -91,7 +96,11 @@ class LocationTVC: UITableViewCell {
 extension LocationTVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        if data.count > 10 {
+            return 15
+        } else {
+            return data.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

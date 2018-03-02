@@ -10,6 +10,9 @@ import UIKit
 import RealmSwift
 import FirebaseFirestore
 import PKHUD
+import CoreLocation
+import AlamofireObjectMapper
+import Alamofire
 
 private let locationCellId = "locationTableCell"
 private let foodTableCellId = "foodTableCell"
@@ -30,10 +33,15 @@ class HomeVC: UIViewController {
     private var isEdit = false
     private var listFood = [ListFood]()
     private var location = [Location]()
+    private var nearFood = [NearFood]()
     
     private var db: Firestore!
     
     private var isAddFood: Bool!
+    
+    private let locationManager = CLLocationManager()
+    
+    private var locationCoor = ""
 
     //MARK: - Lifecycle
     
@@ -45,7 +53,7 @@ class HomeVC: UIViewController {
         getListChannel {
             self.setUpRealm()
         }
-
+        
         titles = ["Món ăn",
                   "Địa điểm"]
       
@@ -60,6 +68,15 @@ class HomeVC: UIViewController {
         tableView.registerNib(FoodTableViewCell.self, foodTableCellId)
         tableView.registerNib(LocationTVC.self, locationCellId)
         tableView.registerNib(PagerTableViewCell.self, pagerCellId)
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            
+        }
     }
     
     //MARK: - IBActions
@@ -104,6 +121,42 @@ class HomeVC: UIViewController {
         } else {
             sender.setTitle("Edit", for: .normal)
             isEdit = false
+        }
+    }
+    
+    func requestAPI(){
+        
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?parameters"
+        
+        let params: Parameters = [
+            "key": API_KEY,
+            "location": locationCoor,
+            "radius": 500,
+            "type": "restaurant"
+        ]
+        
+        Alamofire
+            .request(url, method: .get, parameters: params)
+            .responseObject {[weak self] (res: DataResponse<ResponseNearFood> ) in
+                
+                guard let strongSelf = self else { return }
+                
+                if let error = res.error {
+                    print(error)
+                }
+                
+                guard let response = res.result.value else {
+                    print("no value")
+                    return
+                }
+                
+                if let foods = response.results {
+                    
+                    strongSelf.nearFood.append(contentsOf: foods)
+//                    strongSelf.data.append(strongSelf.nearFood)
+                    strongSelf.tableView.reloadData()
+                    
+                }
         }
     }
     
@@ -187,14 +240,16 @@ class HomeVC: UIViewController {
 extension HomeVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
-        } else {
+        } else if section == 1 {
             return data.count
+        } else {
+            return 1
         }
     }
     
@@ -205,7 +260,7 @@ extension HomeVC: UITableViewDataSource {
             
             if item is [ListFood] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: foodTableCellId, for: indexPath) as! FoodTableViewCell
-
+                
                 if listFood.count == 0{
                     cell.noticeLbl.isHidden = false
                 }else{
@@ -217,21 +272,35 @@ extension HomeVC: UITableViewDataSource {
                 cell.configure(item, titles[indexPath.row])
                 
                 return cell
-            } else {
+                
+            } else if item is [Location] {
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
                 
                 cell.delegate = self
-            
+                
                 cell.configure(item, titles[indexPath.row])
                 
                 return cell
+                
             }
+        } else if indexPath.section == 2 {
+            
+                let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
+                
+                cell.delegate = self
+                
+                cell.configure(nearFood, "Quán ăn gần tôi")
+                
+                return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: pagerCellId, for: indexPath) as! PagerTableViewCell
             
             return cell
             
         }
+        return UITableViewCell()
     }
 
 }
@@ -243,6 +312,22 @@ extension HomeVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
+    }
+}
+
+//MARK: - CLLocation Delegate
+
+extension HomeVC: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+
+        locationCoor = "\(locValue.latitude),\(locValue.longitude)"
+        
+        locationManager.stopUpdatingLocation()
+        
+        requestAPI()
     }
 }
 

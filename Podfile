@@ -14,5 +14,6 @@ pod 'Firebase/Firestore'
 pod 'PKHUD', '~> 5.0'
 pod 'FSPagerView'
 pod ‘Kingfisher’
+pod 'AlamofireObjectMapper', '~> 5.0'
 
 end
