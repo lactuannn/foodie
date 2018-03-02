@@ -290,7 +290,7 @@ extension HomeVC: UITableViewDataSource {
                 
                 cell.delegate = self
                 
-                cell.configure(nearFood, "Quán ăn gần tôi")
+                cell.configure(nearFood, "Gần tôi")
                 
                 return cell
             

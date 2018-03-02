@@ -15,5 +15,10 @@ pod 'PKHUD', '~> 5.0'
 pod 'FSPagerView'
 pod ‘Kingfisher’
 pod 'AlamofireObjectMapper', '~> 5.0'
+pod ‘Firebase/Auth’
+pod ‘Firebase/Database’
+pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
+pod 'FBSDKLoginKit'
 
 end

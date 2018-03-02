@@ -1,4 +1,10 @@
 import UIKit
+import FBSDKLoginKit
+import FirebaseAuth
+
+private let facebookProfilePermission       = "public_profile"
+private let facebookEmailPermission         = "email"
+private let facebookUserFriendsPermission   = "user_friends"
 
 class StartVC: BaseVC {
 
@@ -7,10 +13,52 @@ class StartVC: BaseVC {
     // MARK: - Varialbes
 
     // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let _ = FBSDKAccessToken.current() {
+            
+        }
         
+    }
+    
+    //MARK: - IBActions
+    
+    @IBAction func loginPressed(_ sender: UIButton){
+        
+        let facebookLoginManager = FBSDKLoginManager()
+        
+        facebookLoginManager.logOut()
+        
+        facebookLoginManager.logIn(withReadPermissions: [facebookProfilePermission, facebookEmailPermission, facebookUserFriendsPermission], from: self) { [weak self] (result, error) in
+            
+            guard let strongSelf = self , let _ = FBSDKAccessToken.current().tokenString else { return }
+            if error != nil{
+                print(error ?? "")
+            }
+            
+            let accessToken = FBSDKAccessToken.current()
+            
+            guard let accessTokenString = accessToken?.tokenString else { return }
+            
+            let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+            
+            Auth.auth().signIn(with: credentials) { (user, error) in
+                if error != nil{
+                    
+                    print(error ?? "")
+                    return
+                }
+                strongSelf.checkApp()
+            }
+            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
+                if err != nil{
+                    print(err!)
+                    return
+                }
+            }
+        }
     }
     
 
@@ -22,7 +70,7 @@ class StartVC: BaseVC {
         super.viewDidAppear(animated)
 
         // check app
-        self.checkApp()
+        //self.checkApp()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
