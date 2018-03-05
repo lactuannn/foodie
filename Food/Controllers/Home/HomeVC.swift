@@ -13,6 +13,7 @@ import PKHUD
 import CoreLocation
 import AlamofireObjectMapper
 import Alamofire
+import FBSDKLoginKit
 
 private let locationCellId = "locationTableCell"
 private let foodTableCellId = "foodTableCell"

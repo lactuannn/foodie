@@ -12,6 +12,7 @@ import BubbleTransition
 import FirebaseDatabase
 import FirebaseFirestore
 import PKHUD
+import FirebaseAuth
 
 private let kVoteCellId = "voteCell"
 
@@ -37,6 +38,9 @@ class RandomFoodVC: UIViewController {
     
     private var db: Firestore!
     
+    private var ref: DatabaseReference!
+    
+    var isVoted: Bool!
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -44,10 +48,41 @@ class RandomFoodVC: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         
+        fetchUser()
+        
         db = Firestore.firestore()
         
         fetchVoteFromDatabase {
             self.configureTable()
+        }
+        
+        
+    }
+    
+    func fetchUser(){
+        
+        let uid = Auth.auth().currentUser?.uid
+        
+        ref = Database.database().reference(withPath: "User").child(uid!)
+        
+        ref.observe(DataEventType.value) { (snapshot) in
+            
+            for vote in snapshot.children.allObjects as! [DataSnapshot] {
+                
+                if let object = vote.value as? Bool {
+                    self.isVoted = object
+                }
+                
+                
+//                if let voted = object?["isVoted"] as? Bool {
+//
+//                    self.isVoted = voted
+//                    print(self.isVoted)
+//                }
+                
+                
+                
+            }
         }
     }
     
@@ -171,7 +206,7 @@ extension RandomFoodVC: UITableViewDataSource {
         
         cell.delegate = self
         
-        cell.configure(data[indexPath.row])
+        cell.configure(data[indexPath.row], isVoted)
         
         return cell
     }

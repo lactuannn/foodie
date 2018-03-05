@@ -1,6 +1,7 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseDatabase
 
 private let facebookProfilePermission       = "public_profile"
 private let facebookEmailPermission         = "email"
@@ -11,18 +12,16 @@ class StartVC: BaseVC {
     // MARK: - IBOutlet
 
     // MARK: - Varialbes
+    
+    private var ref: DatabaseReference!
 
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let accessToken = FBSDKAccessToken.current() {
-            gotoMainApp()
-            print("dasdasdsa")
-        }
         
-        checkApp()
+        
         
     }
     
@@ -36,7 +35,7 @@ class StartVC: BaseVC {
         
         facebookLoginManager.logIn(withReadPermissions: [facebookProfilePermission, facebookEmailPermission, facebookUserFriendsPermission], from: self) { [weak self] (result, error) in
             
-            guard let strongSelf = self else { return }// , let _ = FBSDKAccessToken.current().tokenString else { return }
+            guard let strongSelf = self else{return}//, let _ = FBSDKAccessToken.current().tokenString else { return }
             if error != nil{
                 print(error ?? "")
             }
@@ -53,7 +52,17 @@ class StartVC: BaseVC {
                     print(error ?? "")
                     return
                 }
-                strongSelf.checkApp()
+                
+                let uid = Auth.auth().currentUser?.uid
+                
+                strongSelf.ref = Database.database().reference().child("User").child(uid!)
+                
+                let value = ["uid": uid!,
+                             "isVoted": false] as [String : Any]
+                
+                strongSelf.ref.setValue(value)
+                
+                strongSelf.gotoMainApp()
             }
             FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
                 if err != nil{
@@ -74,6 +83,11 @@ class StartVC: BaseVC {
 
         // check app
         //self.checkApp()
+        
+        if let _ = FBSDKAccessToken.current() {
+            gotoMainApp()
+            print("dasdasdsa")
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

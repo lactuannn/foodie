@@ -24,6 +24,10 @@ class VoteTableViewCell: UITableViewCell {
     
     private var ref: DatabaseReference!
     
+    private var refUser: DatabaseReference!
+    
+    private var uid: String!
+    
     //private var key: String!
     
     private var isVoted = false
@@ -33,9 +37,12 @@ class VoteTableViewCell: UITableViewCell {
         
         ref = Database.database().reference().child("Food")
         
+        uid = Auth.auth().currentUser?.uid
+        
+        refUser = Database.database().reference().child("User").child(uid!)
     }
     
-    func configure(_ item: Any){
+    func configure(_ item: Any, _ isVoted: Bool){
 
         if let item = item as? VoteFood{
             
@@ -43,6 +50,8 @@ class VoteTableViewCell: UITableViewCell {
             self.vote.text = "\(item.vote!)"
             //self.key = item.key
         }
+        
+        self.isVoted = isVoted
     }
     
     @IBAction func thumbUp(_ sender: UIButton) {
@@ -70,7 +79,10 @@ class VoteTableViewCell: UITableViewCell {
             
             vote.text = "\(abc)"
             
-            isVoted = true
+            let value = ["uid": uid,
+                         "isVoted": true] as [String : Any]
+            
+            refUser.setValue(value)
         }
     }
 }
