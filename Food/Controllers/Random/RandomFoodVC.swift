@@ -72,16 +72,6 @@ class RandomFoodVC: UIViewController {
                 if let object = vote.value as? Bool {
                     self.isVoted = object
                 }
-                
-                
-//                if let voted = object?["isVoted"] as? Bool {
-//
-//                    self.isVoted = voted
-//                    print(self.isVoted)
-//                }
-                
-                
-                
             }
         }
     }

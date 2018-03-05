@@ -38,7 +38,6 @@
 		885F19AC202AE10200D102AF /* TableView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885F19AB202AE10200D102AF /* TableView + Ext.swift */; };
 		88856BAD204C543200596C5F /* VoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88856BAB204C543200596C5F /* VoteTableViewCell.swift */; };
 		88856BAE204C543200596C5F /* VoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88856BAC204C543200596C5F /* VoteTableViewCell.xib */; };
-		88930114204D42790025009B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88930113204D42790025009B /* User.swift */; };
 		88A0130B202AE43C0045ED47 /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A01309202AE43C0045ED47 /* FoodCollectionViewCell.swift */; };
 		88A0130C202AE43C0045ED47 /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A0130A202AE43C0045ED47 /* FoodCollectionViewCell.xib */; };
 		88A0130E202AF5050045ED47 /* AddFoodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0130D202AF5050045ED47 /* AddFoodVC.swift */; };
@@ -91,7 +90,6 @@
 		88856BAB204C543200596C5F /* VoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteTableViewCell.swift; sourceTree = "<group>"; };
 		88856BAC204C543200596C5F /* VoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteTableViewCell.xib; sourceTree = "<group>"; };
 		88930112204D41390025009B /* Food.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Food.entitlements; sourceTree = "<group>"; };
-		88930113204D42790025009B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		88A01309202AE43C0045ED47 /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		88A0130A202AE43C0045ED47 /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		88A0130D202AF5050045ED47 /* AddFoodVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodVC.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				8806B05F20317C4200B0D30D /* Location.swift */,
 				8827C50820493FF600B0E90A /* NearFood.swift */,
 				88DE914E204D2BA3007F6E78 /* VoteFood.swift */,
-				88930113204D42790025009B /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -561,7 +558,6 @@
 				8842DA5B202AFDFF00C90527 /* ListFood.swift in Sources */,
 				88856BAD204C543200596C5F /* VoteTableViewCell.swift in Sources */,
 				885F1998202ADD5200D102AF /* BaseVC.swift in Sources */,
-				88930114204D42790025009B /* User.swift in Sources */,
 				885F1983202ADAA200D102AF /* HomeVC.swift in Sources */,
 				885F199D202ADEA300D102AF /* UIViewController+Ext.swift in Sources */,
 				8806B0592031386600B0D30D /* FoodTableViewCell.swift in Sources */,

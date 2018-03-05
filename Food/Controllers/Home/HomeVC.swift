@@ -14,6 +14,7 @@ import CoreLocation
 import AlamofireObjectMapper
 import Alamofire
 import FBSDKLoginKit
+import UserNotifications
 
 private let locationCellId = "locationTableCell"
 private let foodTableCellId = "foodTableCell"
@@ -43,11 +44,29 @@ class HomeVC: UIViewController {
     private let locationManager = CLLocationManager()
     
     private var locationCoor = ""
-
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            
+            center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                if granted {
+                    print("Yay!")
+                } else {
+                    print("D'oh")
+                }
+            }
+            
+            scheduleNotification()
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
         
         db = Firestore.firestore()
         
@@ -59,7 +78,7 @@ class HomeVC: UIViewController {
         
         titles = ["Món ăn",
                   "Địa điểm"]
-      
+        
         navigationController?.navigationBar.isHidden = true
         
         tableView.delegate = self
@@ -81,6 +100,28 @@ class HomeVC: UIViewController {
             
         }
     }
+    
+    @available(iOS 10.0, *)
+    func scheduleNotification() {
+        let center = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Hôm nay ăn gì"
+        content.body = "Đừng quên vote món ăn cho trưa nay !!"
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = UNNotificationSound.default()
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 17
+        dateComponents.minute = 43
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+    
+    
     
     //MARK: - IBActions
     
@@ -156,7 +197,7 @@ class HomeVC: UIViewController {
                 if let foods = response.results {
                     
                     strongSelf.nearFood.append(contentsOf: foods)
-//                    strongSelf.data.append(strongSelf.nearFood)
+                    //                    strongSelf.data.append(strongSelf.nearFood)
                     strongSelf.tableView.reloadData()
                     
                 }
@@ -190,7 +231,7 @@ class HomeVC: UIViewController {
                     
                     strongSelf.location.append(location)
                     
-                   // print(strongSelf.location)
+                    // print(strongSelf.location)
                 }
             }
             
@@ -242,7 +283,7 @@ class HomeVC: UIViewController {
             
             let list = Array(realm.objects(ListFood.self))
             let location = Array(realm.objects(Location.self))
-
+            
             self.location += location
             self.listFood += list
             data = [self.listFood, self.location]
@@ -251,10 +292,10 @@ class HomeVC: UIViewController {
         updateList()
         
         // Notify us when Realm changes
-//        self.notificationToken = self.realm.observe { _,_ in
-//            updateList()
-//            self.realm.refresh()
-//        }
+        //        self.notificationToken = self.realm.observe { _,_ in
+        //            updateList()
+        //            self.realm.refresh()
+        //        }
     }
     
     
@@ -268,7 +309,7 @@ class HomeVC: UIViewController {
             vc.delegate = self
         }
     }
-
+    
 }
 
 //MARK: - TableView Datsource
@@ -322,13 +363,13 @@ extension HomeVC: UITableViewDataSource {
             }
         } else if indexPath.section == 2 {
             
-                let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
-                
-                cell.delegate = self
-                
-                cell.configure(nearFood, "Gần tôi")
-                
-                return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: locationCellId, for: indexPath) as! LocationTVC
+            
+            cell.delegate = self
+            
+            cell.configure(nearFood, "Gần tôi")
+            
+            return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: pagerCellId, for: indexPath) as! PagerTableViewCell
@@ -338,7 +379,7 @@ extension HomeVC: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-
+    
 }
 
 //MARK: - TableView Delegate
@@ -358,7 +399,7 @@ extension HomeVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-
+        
         locationCoor = "\(locValue.latitude),\(locValue.longitude)"
         
         locationManager.stopUpdatingLocation()
