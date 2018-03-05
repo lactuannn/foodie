@@ -51,7 +51,9 @@ class HomeVC: UIViewController {
         db = Firestore.firestore()
         
         getListChannel {
-            self.setUpRealm()
+            self.getListFood(completion: {
+                self.setUpRealm()
+            })
         }
         
         titles = ["Món ăn",
@@ -179,7 +181,7 @@ class HomeVC: UIViewController {
             for snap in snapshot {
                 
                 if let name = snap["name"] as? String,
-                    let address = snap["address"] as? String {
+                    let address = snap["address"] as? String{
                     
                     let value = ["name": name, "address": address]
                     
@@ -195,9 +197,42 @@ class HomeVC: UIViewController {
             
             completion?()
         }
+    }
+    
+    func getListFood(completion: (() -> ())?){
         
-        
-
+        db.collection("ListFood").document("Food").getDocument {[weak self] (snapshot, error) in
+            
+            guard let strongSelf = self else { return }
+            
+            
+            if error != nil {
+                print("error:", error?.localizedDescription ?? "")
+                return
+            }
+            
+            guard let snapshot = snapshot?.data()!["Food"] as? [[String: Any]] else { return }
+            
+            for snap in snapshot {
+                
+                if let name = snap["name"] as? String,
+                    let price = snap["price"] as? String{
+                    
+                    var value = ["name": name, "price": price]
+                    
+                    if let thumb = snap["thumb"] as? String {
+                        value["thumbUrl"] = thumb
+                    }
+                    
+                    let food = ListFood(value: value)
+                    
+                    strongSelf.listFood.append(food)
+                    
+                    // print(strongSelf.location)
+                }
+            }
+            completion?()
+        }
     }
     
     func setUpRealm(){

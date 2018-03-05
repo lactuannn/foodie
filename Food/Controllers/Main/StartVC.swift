@@ -17,9 +17,12 @@ class StartVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = FBSDKAccessToken.current() {
-            
+        if let accessToken = FBSDKAccessToken.current() {
+            gotoMainApp()
+            print("dasdasdsa")
         }
+        
+        checkApp()
         
     }
     
@@ -33,7 +36,7 @@ class StartVC: BaseVC {
         
         facebookLoginManager.logIn(withReadPermissions: [facebookProfilePermission, facebookEmailPermission, facebookUserFriendsPermission], from: self) { [weak self] (result, error) in
             
-            guard let strongSelf = self , let _ = FBSDKAccessToken.current().tokenString else { return }
+            guard let strongSelf = self else { return }// , let _ = FBSDKAccessToken.current().tokenString else { return }
             if error != nil{
                 print(error ?? "")
             }

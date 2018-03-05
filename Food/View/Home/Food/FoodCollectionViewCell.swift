@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 protocol HomeCollectionViewCellDelegate: NSObjectProtocol{
     
@@ -40,34 +41,46 @@ class FoodCollectionViewCell: UICollectionViewCell {
         self.layer.masksToBounds = false
     }
     
-    @IBAction func deleteBtnPressed(_ sender: UIButton){
-        
-        delegate?.deleteItem(btnTag)     
-    }
+//    @IBAction func deleteBtnPressed(_ sender: UIButton){
+//
+//        delegate?.deleteItem(btnTag)
+//    }
     
-    @IBAction func likeBtnPressed(_ sender: UIButton){
-        
-        if isLiked {
-            likeBtn.setImage(#imageLiteral(resourceName: "ic_favorite_border"), for: .normal)
-            isLiked = false
-        } else {
-            likeBtn.setImage(#imageLiteral(resourceName: "ic_favorites"), for: .normal)
-            isLiked = true
-        }
-        delegate?.isLike(isLiked, btnTag)
-    }
-    
+//    @IBAction func likeBtnPressed(_ sender: UIButton){
+//
+//        if isLiked {
+//            likeBtn.setImage(#imageLiteral(resourceName: "ic_favorite_border"), for: .normal)
+//            isLiked = false
+//        } else {
+//            likeBtn.setImage(#imageLiteral(resourceName: "ic_favorites"), for: .normal)
+//            isLiked = true
+//        }
+//        delegate?.isLike(isLiked, btnTag)
+//    }
+//
     func configure(_ item: Any) {
         
         if let item = item as? ListFood{
             
             name.text = item.name
             
-            let image = UIImage(data: item.thumb!)
-            
-            thumb.image = image
-            
             self.price.text = "\(item.price)₫"
+            
+            if let data = item.thumb {
+                
+                let image = UIImage(data: data)
+                
+                thumb.image = image
+                
+            } else {
+                
+                let thumbUrl = item.thumbUrl
+                    
+                let url = URL(string: thumbUrl)
+                    
+                thumb.kf.setImage(with: url, options:[.transition(ImageTransition.fade(0.5))])
+                
+            }
         }
         
 //        if isLiked{

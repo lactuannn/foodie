@@ -25,8 +25,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="229" height="116"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background Image" translatesAutoresizingMaskIntoConstraints="NO" id="Tpa-WL-qAq">
-                        <rect key="frame" x="0.0" y="0.0" width="229" height="83"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-square" translatesAutoresizingMaskIntoConstraints="NO" id="Tpa-WL-qAq">
+                        <rect key="frame" x="0.0" y="0.0" width="229" height="89"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bún bò huế" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxA-6O-Nh4">
                         <rect key="frame" x="10" y="97" width="146" height="12"/>
@@ -55,7 +55,7 @@
                 <constraint firstAttribute="trailing" secondItem="oc4-P8-odw" secondAttribute="trailing" constant="6" id="Orq-HH-c8Q"/>
                 <constraint firstAttribute="bottom" secondItem="oc4-P8-odw" secondAttribute="bottom" constant="4" id="SIP-aa-kEA"/>
                 <constraint firstAttribute="bottom" secondItem="dxA-6O-Nh4" secondAttribute="bottom" constant="7" id="dEP-7b-SHM"/>
-                <constraint firstItem="dxA-6O-Nh4" firstAttribute="top" secondItem="Tpa-WL-qAq" secondAttribute="bottom" constant="14" id="qNl-da-FeE"/>
+                <constraint firstItem="dxA-6O-Nh4" firstAttribute="top" secondItem="Tpa-WL-qAq" secondAttribute="bottom" constant="8" id="qNl-da-FeE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="229" height="116"/>
@@ -64,10 +64,10 @@
                 <outlet property="price" destination="oc4-P8-odw" id="cSt-dn-GuE"/>
                 <outlet property="thumb" destination="Tpa-WL-qAq" id="Oge-BD-Ns9"/>
             </connections>
-            <point key="canvasLocation" x="-256.5" y="19"/>
+            <point key="canvasLocation" x="18.5" y="-35"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Background Image" width="375" height="667"/>
+        <image name="placeholder-square" width="1000" height="1000"/>
     </resources>
 </document>

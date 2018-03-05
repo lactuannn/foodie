@@ -13,6 +13,6 @@ class ListFood: Object {
     
     @objc dynamic var name = ""
     @objc dynamic var price = ""
-    @objc dynamic var isLiked = false
-    @objc dynamic var thumb: Data!
+    @objc dynamic var thumbUrl = ""
+    @objc dynamic var thumb: Data? = nil
 }
