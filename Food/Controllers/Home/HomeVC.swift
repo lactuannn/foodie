@@ -113,8 +113,8 @@ class HomeVC: UIViewController {
         content.sound = UNNotificationSound.default()
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 17
-        dateComponents.minute = 43
+        dateComponents.hour = 11
+        dateComponents.minute = 40
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
