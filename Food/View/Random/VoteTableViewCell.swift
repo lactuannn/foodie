@@ -33,7 +33,6 @@ class VoteTableViewCell: UITableViewCell {
         
         ref = Database.database().reference().child("Food")
         
-        
     }
     
     func configure(_ item: Any){

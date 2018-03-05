@@ -132,9 +132,7 @@ class RandomFoodVC: UIViewController {
 
             if snapshot.childrenCount > 0 {
                 
-               // strongSelf.vote.removeAll()
-                
-                print(snapshot)
+                strongSelf.data.removeAll()
                 
                 for food in snapshot.children.allObjects as! [DataSnapshot] {
                     
